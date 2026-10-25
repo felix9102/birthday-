@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Selamat Ulang Tahun!</title>
+<link href="https://fonts.googleapis.com/css2?family=Bangers&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#12030a;--bg2:#2a0510;--red:#e11d2e;--red2:#ff4757;--blue:#2457d6;--text:#fff1f2;--muted:#f5b5bb;--card:rgba(255,255,255,.06);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{color-scheme:dark;scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0}
+body{background:radial-gradient(ellipse at 50% 0%,var(--bg2),var(--bg) 70%);color:var(--text);font-family:'Poppins',system-ui,sans-serif;overflow-x:hidden;min-height:100vh}
+canvas#bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+canvas#fx{position:fixed;inset:0;z-index:50;pointer-events:none}
+section{position:relative;z-index:1;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:70px 20px;text-align:center}
+.corner{position:fixed;top:0;width:min(46vw,260px);z-index:1;opacity:.5;pointer-events:none}
+.corner.l{left:0}.corner.r{right:0;transform:scaleX(-1)}
+.thread{position:fixed;top:0;left:50%;z-index:2;width:2px;height:0;background:linear-gradient(#fff,#ffffff99);transform-origin:top center;animation:drop 2.6s .4s cubic-bezier(.3,1.4,.5,1) forwards,swing 4s 3s ease-in-out infinite}
+.thread svg{position:absolute;bottom:-80px;left:-27px;width:54px;cursor:pointer;pointer-events:auto;filter:drop-shadow(0 6px 8px rgba(0,0,0,.5));transition:transform .2s}.thread svg:hover{transform:scale(1.12)}
+@keyframes drop{to{height:min(26vh,190px)}}
+@keyframes swing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.eyebrow{letter-spacing:.35em;font-size:.8rem;color:var(--muted);text-transform:uppercase;margin-top:12vh}
+h1{font-family:'Bangers',Impact,sans-serif;font-weight:400;font-size:clamp(3rem,13vw,8rem);line-height:.95;letter-spacing:.03em;margin:14px 0;
+background:linear-gradient(180deg,#fff 0%,var(--red2) 45%,var(--red) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+filter:drop-shadow(4px 5px 0 #5a0713);animation:pop 1s .2s both cubic-bezier(.2,1.6,.4,1)}
+@keyframes pop{from{transform:scale(.3) rotate(-8deg);opacity:0}}
+#nama{display:inline-block;font-family:'Bangers',Impact,sans-serif;font-size:clamp(1.8rem,7vw,3.4rem);color:#fff;border-bottom:3px dashed var(--red2);outline:none;padding:0 8px;cursor:text}
+.hint{font-size:.72rem;color:var(--muted);margin-top:6px;opacity:.7}
+.btn{margin-top:30px;border:0;cursor:pointer;font:600 1rem 'Poppins',sans-serif;color:#fff;padding:14px 30px;border-radius:50px;background:linear-gradient(135deg,var(--red2),var(--red));box-shadow:0 8px 28px rgba(225,29,46,.5),inset 0 -3px 0 rgba(0,0,0,.25);transition:transform .2s,box-shadow .2s}
+.btn:hover{transform:translateY(-3px) scale(1.04)}.btn:active{transform:scale(.96)}
+.btn.blue{background:linear-gradient(135deg,#3b72f0,var(--blue));box-shadow:0 8px 28px rgba(36,87,214,.45)}
+.scroll{position:absolute;bottom:22px;font-size:.75rem;color:var(--muted);animation:bob 1.6s infinite}
+@keyframes bob{50%{transform:translateY(8px)}}
+h2{font-family:'Bangers',Impact,sans-serif;font-weight:400;font-size:clamp(2rem,7vw,3.4rem);letter-spacing:.04em;color:var(--red2);text-shadow:3px 3px 0 #5a0713;margin-bottom:10px}
+p.sub{color:var(--muted);max-width:480px;margin-bottom:10px}
+.cake{width:min(86vw,340px);margin-top:10px;filter:drop-shadow(0 20px 30px rgba(0,0,0,.5))}
+.cake .tier{transform-box:fill-box;transform-origin:center bottom;animation:rise .9s both cubic-bezier(.2,1.4,.4,1);animation-play-state:paused}
+.go .tier{animation-play-state:running}
+.go .t1{animation-delay:.1s}.go .t2{animation-delay:.5s}.go .t3{animation-delay:.9s}.go .can{animation-delay:1.4s}
+@keyframes rise{from{transform:translateY(-120px) scaleY(.4);opacity:0}}
+.can{transform-box:fill-box;transform-origin:center bottom;animation:rise .6s both;animation-play-state:paused}
+.flame{transform-box:fill-box;transform-origin:50% 100%;animation:flick .35s infinite alternate ease-in-out;transition:opacity .4s,transform .4s}
+.flame:nth-of-type(odd){animation-duration:.28s}
+@keyframes flick{from{transform:scale(1,1) rotate(-4deg)}to{transform:scale(.85,1.2) rotate(4deg)}}
+.out .flame{opacity:0;transform:scale(0);animation:none}
+.smoke{opacity:0}.out .smoke{animation:smoke 2s ease-out forwards}
+@keyframes smoke{from{opacity:.7;transform:translateY(0)}to{opacity:0;transform:translateY(-40px)}}
+.msg{margin-top:18px;min-height:60px;font-size:1.05rem;color:#fff;max-width:420px;opacity:0;transform:translateY(14px);transition:all .8s}
+.msg.show{opacity:1;transform:none}
+.cards{display:grid;gap:18px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));max-width:900px;width:100%;margin-top:26px}
+.card{background:var(--card);border:1px solid rgba(255,71,87,.3);border-radius:20px;padding:26px 20px;backdrop-filter:blur(6px);transition:transform .3s,border-color .3s,box-shadow .3s}
+.card:hover{transform:translateY(-8px) rotate(-1deg);border-color:var(--red2);box-shadow:0 14px 34px rgba(225,29,46,.35)}
+.card .ic{font-size:2.4rem;margin-bottom:8px}
+.card h3{font-family:'Bangers',Impact,sans-serif;font-weight:400;letter-spacing:.05em;font-size:1.5rem;margin-bottom:6px}
+.card p{font-size:.9rem;color:var(--muted)}
+.rv{opacity:0;transform:translateY(40px);transition:opacity .8s,transform .8s}
+.rv.in{opacity:1;transform:none}
+.big{font-family:'Bangers',Impact,sans-serif;font-size:clamp(2.4rem,10vw,5.5rem);line-height:1;color:#fff;text-shadow:4px 4px 0 var(--red)}
+footer{position:relative;z-index:1;text-align:center;padding:24px;font-size:.78rem;color:var(--muted)}
+.thread.climb{animation:climb 1.8s cubic-bezier(.5,0,.8,.4) forwards}.thread.climb svg{animation:spin 1.8s linear}.thread.climb .bubble{display:none}
+@keyframes climb{to{height:0}}@keyframes spin{to{transform:rotate(720deg)}}
+.bubble{position:absolute;bottom:-52px;left:34px;white-space:nowrap;background:#fff;color:#c1121f;font:400 1.1rem 'Bangers',sans-serif;letter-spacing:.05em;padding:6px 14px;border-radius:16px;opacity:0;animation:bub .5s 3.4s forwards,bob 1.6s 4s infinite;pointer-events:none}
+@keyframes bub{from{opacity:0;transform:scale(.4)}to{opacity:1;transform:scale(1)}}
+.pow{position:fixed;z-index:70;width:150px;height:150px;display:flex;align-items:center;justify-content:center;background:#ffd400;color:#c1121f;font:400 1.6rem 'Bangers',Impact,sans-serif;letter-spacing:.05em;pointer-events:none;animation:pw 1.1s forwards}
+@keyframes pw{0%{transform:translate(-50%,-50%) scale(0) rotate(-20deg)}30%{transform:translate(-50%,-50%) scale(1.2) rotate(6deg)}100%{transform:translate(-50%,-50%) scale(1) rotate(-4deg);opacity:0}}
+body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-image:radial-gradient(rgba(255,71,87,.2) 1.6px,transparent 2.2px);background-size:18px 18px;-webkit-mask-image:linear-gradient(135deg,#000,transparent 55%);mask-image:linear-gradient(135deg,#000,transparent 55%)}
+#bar{position:fixed;top:0;left:0;height:4px;width:0;z-index:60;background:linear-gradient(90deg,#fff,#ff4757,#e11d2e)}
+.ticker{position:relative;z-index:2;overflow:hidden;background:var(--red);transform:rotate(-2deg) scale(1.05);padding:10px 0;box-shadow:0 6px 24px rgba(225,29,46,.5);border-block:3px solid #fff}
+.ticker div{display:inline-block;white-space:nowrap;font:400 1.6rem 'Bangers',Impact,sans-serif;letter-spacing:.1em;animation:tk 16s linear infinite}
+@keyframes tk{to{transform:translateX(-50%)}}
+.bl{position:fixed;bottom:-90px;width:42px;height:54px;border-radius:50% 50% 48% 48%;z-index:0;opacity:.55;pointer-events:none;animation:fl linear infinite}
+.bl::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:40px;background:#fff6}
+@keyframes fl{0%{transform:translate(0,0) scale(var(--s))}50%{transform:translate(30px,-60vh) scale(var(--s))}100%{transform:translate(-20px,-125vh) scale(var(--s))}}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.01s!important;transition-duration:.01s!important}}
+</style>
+</head>
+<body>
+<canvas id="bg"></canvas><canvas id="fx"></canvas>
+
+<svg class="corner l" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1.2"><g id="web"></g></svg>
+<svg class="corner r" viewBox="0 0 200 200" fill="none" stroke="#fff" stroke-width="1.2"><use href="#web"/></svg>
+
+<div class="thread"><svg viewBox="0 0 60 90"><g transform="rotate(180 30 45)"><rect x="20" y="58" width="8" height="26" rx="3" fill="#2457d6"/><rect x="32" y="58" width="8" height="26" rx="3" fill="#2457d6"/><rect x="19" y="78" width="10" height="8" rx="3" fill="#e11d2e"/><rect x="31" y="78" width="10" height="8" rx="3" fill="#e11d2e"/><rect x="7" y="31" width="10" height="26" rx="5" fill="#e11d2e"/><rect x="43" y="31" width="10" height="26" rx="5" fill="#e11d2e"/><circle cx="12" cy="58" r="5" fill="#2457d6"/><circle cx="48" cy="58" r="5" fill="#2457d6"/><rect x="16" y="29" width="28" height="33" rx="9" fill="#e11d2e"/><rect x="16" y="54" width="28" height="5" fill="#111"/><polygon points="32,34 25,46 30,46 27,56 36,43 31,43" fill="#ffd400"/><circle cx="30" cy="17" r="13" fill="#e11d2e"/><path d="M24 6l6 5 6-5" fill="none" stroke="#2457d6" stroke-width="3" stroke-linecap="round"/><ellipse cx="24.5" cy="17" rx="5" ry="3.2" transform="rotate(-18 24.5 17)" fill="#fff" stroke="#111" stroke-width="1.4"/><ellipse cx="35.5" cy="17" rx="5" ry="3.2" transform="rotate(18 35.5 17)" fill="#fff" stroke="#111" stroke-width="1.4"/></g></svg><div class="bubble">Klik aku! 🚀</div></div>
+
+<section id="hero">
+  <div class="eyebrow">Hari spesial untuk</div>
+  <h1>Happy<br>Birthday!</h1>
+  <div id="nama" contenteditable="true" spellcheck="false">Sahabatku</div>
+  <div class="hint">✎ ketuk nama untuk mengganti</div>
+  <button class="btn" onclick="go('kue')">Lihat kejutannya 🎂</button>
+  <div class="scroll">▼ geser ke bawah</div>
+</section>
+
+<div id="bar"></div>
+<div class="ticker"><div>★ HAPPY BIRTHDAY ★ SELAMAT ULANG TAHUN ★ HORE! ★ HAPPY BIRTHDAY ★ SELAMAT ULANG TAHUN ★ HORE! ★ HAPPY BIRTHDAY ★ SELAMAT ULANG TAHUN ★ HORE! ★ HAPPY BIRTHDAY ★ SELAMAT ULANG TAHUN ★ HORE! </div></div>
+<section id="kue">
+  <h2 class="rv">Saatnya Tiup Lilin!</h2>
+  <p class="sub rv">Pejamkan mata, buat satu permintaan, lalu tiup lilinnya.</p>
+  <svg class="cake" id="cake" viewBox="0 0 300 300">
+    <defs>
+      <linearGradient id="r1" x1="0" x2="1"><stop offset="0" stop-color="#9c0f1f"/><stop offset=".5" stop-color="#ff3b4d"/><stop offset="1" stop-color="#9c0f1f"/></linearGradient>
+      <linearGradient id="r2" x1="0" x2="1"><stop offset="0" stop-color="#b3132a"/><stop offset=".5" stop-color="#ff5566"/><stop offset="1" stop-color="#b3132a"/></linearGradient>
+      <radialGradient id="fl" cx=".5" cy=".7"><stop offset="0" stop-color="#fff7b0"/><stop offset=".6" stop-color="#ffb02e"/><stop offset="1" stop-color="#ff5a1f"/></radialGradient>
+    </defs>
+    <ellipse cx="150" cy="276" rx="130" ry="14" fill="#2457d6"/><ellipse cx="150" cy="272" rx="130" ry="14" fill="#3b72f0"/>
+    <g class="tier t1"><rect x="40" y="200" width="220" height="70" rx="10" fill="url(#r1)"/>
+      <path d="M40 210q0-12 12-12h196q12 0 12 12v6q-14 0-14 12t-14 0-14 14-14-10-14 8-14-12-14 10-14-8-14 12-14-10-14 8-14-12-14 8-8-6z" fill="#fff"/></g>
+    <g class="tier t2"><rect x="70" y="145" width="160" height="58" rx="10" fill="url(#r2)"/>
+      <path d="M70 156q0-11 11-11h138q11 0 11 11v5q-12 0-12 10t-12 0-12 12-12-8-12 7-12-10-12 8-12-7-12 10-10-6z" fill="#fff"/></g>
+    <g class="tier t3"><rect x="100" y="98" width="100" height="50" rx="9" fill="url(#r1)"/>
+      <path d="M100 108q0-10 10-10h80q10 0 10 10v4q-10 0-10 8t-10 0-10 10-10-7-10 6-10-8-10 7-10-5z" fill="#fff"/>
+      <circle cx="130" cy="132" r="4" fill="#fff"/><circle cx="150" cy="136" r="4" fill="#2457d6"/><circle cx="170" cy="132" r="4" fill="#fff"/></g>
+    <g id="candles"></g>
+  </svg>
+  <div class="msg" id="msg"></div>
+  <button class="btn" id="blow">Tiup Lilin 💨</button>
+  <button class="btn blue" id="again" style="display:none">Nyalakan lagi 🔥</button>
+</section>
+
+<section id="doa">
+  <h2 class="rv">Harapan Untukmu</h2>
+  <p class="sub rv">Semoga setiap jaring yang kamu tarik membawamu ke tempat yang lebih tinggi.</p>
+  <div class="cards">
+    <div class="card rv"><div class="ic">🕸️</div><h3>Selalu Terhubung</h3><p>Dikelilingi orang-orang yang menyayangimu, sekuat benang-benang jaring.</p></div>
+    <div class="card rv"><div class="ic">⚡</div><h3>Penuh Semangat</h3><p>Energi dan keberanian untuk menghadapi hal baru di tahun ini.</p></div>
+    <div class="card rv"><div class="ic">🏙️</div><h3>Cita-cita Tinggi</h3><p>Terus melompat dari satu gedung impian ke impian berikutnya.</p></div>
+  </div>
+</section>
+
+<section id="akhir">
+  <div class="rv big">Selamat<br>Ulang Tahun<br><span id="nama2" style="color:var(--red2)">Sahabatku</span>!</div>
+  <p class="sub rv" style="margin-top:22px">Dengan kekuatan besar datang tanggung jawab besar… dan kue yang besar juga. 🎉</p>
+  <button class="btn rv" onclick="boom(innerWidth/2,innerHeight/2,160)">Hujan Konfeti 🎊</button>
+</section>
+<footer>Dibuat dengan ❤️ untuk hari yang spesial</footer>
+
+<script>
+const $=s=>document.querySelector(s);
+const go=id=>document.getElementById(id).scrollIntoView({behavior:'smooth'});
+
+// Nama (bisa lewat link: ...#Budi)
+const nm=$('#nama'),nm2=$('#nama2');
+const h=decodeURIComponent(location.hash.slice(1));
+if(h&&!/^comment-/.test(h))nm.textContent=nm2.textContent=h;
+nm.addEventListener('input',()=>nm2.textContent=nm.textContent||'Sahabatku');
+nm.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();nm.blur()}});
+
+// Sarang laba-laba di pojok
+(function(){
+  let s='';const c=100,R=[18,36,56,78,100];
+  for(let i=0;i<=6;i++){const a=i/6*Math.PI/2;s+=`<line x1="0" y1="0" x2="${(Math.cos(a)*200).toFixed(1)}" y2="${(Math.sin(a)*200).toFixed(1)}"/>`}
+  R.forEach(r=>{r*=1.9;let d='M'+r+' 0';for(let i=1;i<=6;i++){const a=i/6*Math.PI/2,pa=(i-.5)/6*Math.PI/2,rr=r*.9;
+    d+=`Q${(Math.cos(pa)*rr).toFixed(1)} ${(Math.sin(pa)*rr).toFixed(1)} ${(Math.cos(a)*r).toFixed(1)} ${(Math.sin(a)*r).toFixed(1)}`}
+    s+=`<path d="${d}"/>`});
+  $('#web').innerHTML=s;
+})();
+
+// Lilin
+const cg=$('#candles');let cs='';
+[[112,98],[131,92],[150,88],[169,92],[188,98]].forEach(([x,y],i)=>{
+  cs+=`<g class="can tier" style="animation-delay:${1.4+i*.08}s"><rect x="${x-3}" y="${y-30}" width="6" height="30" rx="2" fill="${i%2?'#fff':'#2457d6'}"/>
+  <path class="flame" d="M${x} ${y-52}q9 12 0 20q-9-8 0-20z" fill="url(#fl)"/>
+  <path class="smoke" d="M${x} ${y-40}q-8-10 0-20t0-20" fill="none" stroke="#ddd" stroke-width="2"/></g>`});
+cg.innerHTML=cs;
+
+// Animasi muncul saat scroll
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');if(e.target.id==='cake')e.target.classList.add('go')}}),{threshold:.25});
+document.querySelectorAll('.rv').forEach((el,i)=>{el.style.transitionDelay=(i%3)*.12+'s';io.observe(el)});
+io.observe($('#cake'));
+
+// Tiup lilin
+const wishes=['Semoga semua impianmu terkabul! ✨','Tahun ini penuh petualangan seru! 🕷️','Sehat, bahagia, dan sukses selalu! ❤️'];
+$('#blow').onclick=()=>{
+  $('#cake').classList.add('out');
+  const r=$('#cake').getBoundingClientRect();boom(r.left+r.width/2,r.top+r.height*.3,140);
+  const m=$('#msg');m.textContent=wishes[Math.floor(Math.random()*wishes.length)];m.classList.add('show');
+  $('#blow').style.display='none';$('#again').style.display='inline-block';
+};
+$('#again').onclick=()=>{$('#cake').classList.remove('out');$('#msg').classList.remove('show');$('#again').style.display='none';$('#blow').style.display='inline-block'};
+
+// Konfeti
+const fx=$('#fx'),fc=fx.getContext('2d');let P=[];
+function sz(){for(const c of [fx,bg]){c.width=innerWidth;c.height=innerHeight}}
+const bg=$('#bg'),bc=bg.getContext('2d');sz();addEventListener('resize',sz);
+function boom(x,y,n){const col=['#ff4757','#e11d2e','#fff','#3b72f0','#ffd1d5'];
+  for(let i=0;i<n;i++){const a=Math.random()*Math.PI*2,v=4+Math.random()*9;
+    P.push({x,y,vx:Math.cos(a)*v,vy:Math.sin(a)*v-5,w:6+Math.random()*6,h:3+Math.random()*4,r:Math.random()*6,vr:(Math.random()-.5)*.4,c:col[i%5],life:1})}}
+(function loop(){fc.clearRect(0,0,fx.width,fx.height);
+  P=P.filter(p=>p.life>0);
+  P.forEach(p=>{p.vy+=.25;p.vx*=.99;p.x+=p.vx;p.y+=p.vy;p.r+=p.vr;p.life-=.007;
+    fc.save();fc.globalAlpha=Math.max(p.life,0);fc.translate(p.x,p.y);fc.rotate(p.r);fc.fillStyle=p.c;fc.fillRect(-p.w/2,-p.h/2,p.w,p.h);fc.restore()});
+  requestAnimationFrame(loop)})();
+
+// Latar jaring bergerak, bereaksi pada sentuhan/mouse
+const N=[],M={x:-999,y:-999};
+const cnt=()=>Math.min(70,Math.floor(innerWidth*innerHeight/16000));
+for(let i=0;i<cnt();i++)N.push({x:Math.random()*innerWidth,y:Math.random()*innerHeight,vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4});
+addEventListener('pointermove',e=>{M.x=e.clientX;M.y=e.clientY});
+function star(n,a,b){const s=[];for(let i=0;i<n*2;i++){const r=i%2?a:b,t=i/(n*2)*Math.PI*2;s.push((50+Math.cos(t)*r).toFixed(1)+'% '+(50+Math.sin(t)*r).toFixed(1)+'%')}return 'polygon('+s.join(',')+')'}
+const SP=star(12,32,50),W=['POW!','WOW!','YEAY!','BOOM!','ZAP!','HORE!'];
+function pow(x,y,t){const d=document.createElement('div');d.className='pow';d.textContent=t;d.style.left=x+'px';d.style.top=y+'px';d.style.clipPath=SP;document.body.appendChild(d);setTimeout(()=>d.remove(),1150)}
+
+// Pahlawan di benang: klik untuk memanjat naik, lalu turun lagi
+const th=$('.thread'),hv=th.querySelector('svg');let busy=false;
+hv.addEventListener('click',()=>{if(busy)return;busy=true;
+  const r=hv.getBoundingClientRect();pow(r.left+r.width/2,r.top+r.height/2,'THWIP!');
+  th.classList.add('climb');
+  setTimeout(()=>{th.style.display='none'},1900)});
+
+// Balon naik & progress scroll
+(function(){const c=['#ff4757','#e11d2e','#3b72f0','#fff','#ff8a94'];for(let i=0;i<12;i++){const b=document.createElement('div');b.className='bl';b.style.cssText='left:'+(Math.random()*96)+'%;background:'+c[i%5]+';animation-duration:'+(10+Math.random()*10)+'s;animation-delay:-'+(Math.random()*14)+'s;--s:'+(.7+Math.random()*.6);document.body.appendChild(b)}})();
+addEventListener('scroll',()=>{$('#bar').style.width=scrollY/(document.documentElement.scrollHeight-innerHeight)*100+'%'},{passive:true});
+(function draw(){bc.clearRect(0,0,bg.width,bg.height);
+  N.forEach(a=>{a.x+=a.vx;a.y+=a.vy;if(a.x<0||a.x>bg.width)a.vx*=-1;if(a.y<0||a.y>bg.height)a.vy*=-1;
+    bc.fillStyle='rgba(255,71,87,.6)';bc.beginPath();bc.arc(a.x,a.y,1.8,0,7);bc.fill();
+    N.forEach(b=>{const d=Math.hypot(a.x-b.x,a.y-b.y);if(d<120){bc.strokeStyle=`rgba(255,90,100,${(1-d/120)*.28})`;bc.beginPath();bc.moveTo(a.x,a.y);bc.lineTo(b.x,b.y);bc.stroke()}});
+    const dm=Math.hypot(a.x-M.x,a.y-M.y);if(dm<160){bc.strokeStyle=`rgba(255,255,255,${(1-dm/160)*.5})`;bc.beginPath();bc.moveTo(a.x,a.y);bc.lineTo(M.x,M.y);bc.stroke()}});
+  requestAnimationFrame(draw)})();
+</script>
+</body>
+</html>
